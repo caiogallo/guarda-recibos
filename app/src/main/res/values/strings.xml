@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Guarda Recibo</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="lblMonth">Mês</string>
+    <string name="lblYear">Ano</string>
+    <string name="unableToSaveFile">Não foi possível salvar o arquivo</string>
+</resources>
