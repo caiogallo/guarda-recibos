@@ -53,7 +53,8 @@ public class ShareActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             return true;
         }else{
-            Toast.makeText(this, "Não posso salvar recibos, não tenho permissão para isso :(", Toast.LENGTH_LONG);
+            Toast.makeText(this, R.string.unableToSaveFileNoPermission, Toast.LENGTH_LONG)
+                    .show();
             return false;
         }
     }
@@ -131,10 +132,12 @@ public class ShareActivity extends AppCompatActivity {
             stream.close();
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, R.string.unableToSaveFile, Toast.LENGTH_LONG);
+            Toast.makeText(this, R.string.unableToSaveFile, Toast.LENGTH_LONG)
+                    .show();
             Log.e(TAG, "File not found " + filename, e);
         } catch (IOException e) {
-            Toast.makeText(this, R.string.unableToSaveFile, Toast.LENGTH_LONG);
+            Toast.makeText(this, R.string.unableToSaveFile, Toast.LENGTH_LONG)
+                    .show();
             Log.e(TAG, "Can't read file ", e);
         }
     }
