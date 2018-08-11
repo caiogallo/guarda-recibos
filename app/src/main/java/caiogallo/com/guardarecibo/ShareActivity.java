@@ -27,6 +27,7 @@ public class ShareActivity extends AppCompatActivity {
     public static final String TAG = "ShareActivity";
     public static final String MONTH_YEAR_TEMPLATE = "%s: %d";
     public static final String MONTH_YEAR_DIR_TEMPLATE = "GuardaRecibo/%d/%d";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
