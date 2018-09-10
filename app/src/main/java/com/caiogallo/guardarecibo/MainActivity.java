@@ -1,4 +1,4 @@
-package caiogallo.com.guardarecibo;
+package com.caiogallo.guardarecibo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+
+import caiogallo.com.guardarecibo.R;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_PERMISSION_STORAGE = 1;

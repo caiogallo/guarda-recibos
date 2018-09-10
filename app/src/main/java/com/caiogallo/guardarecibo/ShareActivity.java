@@ -1,4 +1,4 @@
-package caiogallo.com.guardarecibo;
+package com.caiogallo.guardarecibo;
 
 import android.Manifest;
 import android.content.Intent;
@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import caiogallo.com.guardarecibo.R;
 
 public class ShareActivity extends AppCompatActivity {
     public static final String TAG = "ShareActivity";
