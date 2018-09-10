@@ -30,12 +30,13 @@ public class MainActivity extends AppCompatActivity {
     private void verifyStoragePermission(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_STORAGE) {
             for (String permission : permissions) {
-                if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                        permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        Log.i(TAG, "grant");
+                        Log.i(TAG, permission + " grant");
                         permissionVisibility(View.INVISIBLE);
                     }else{
-                        Log.i(TAG, "revoke");
+                        Log.i(TAG, permission + " revoke");
                         permissionVisibility(View.VISIBLE);
                     }
                 }
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
             permissionVisibility(View.INVISIBLE);
         }
     }

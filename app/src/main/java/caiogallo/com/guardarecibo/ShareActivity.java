@@ -63,10 +63,19 @@ public class ShareActivity extends AppCompatActivity {
     private InputStream loadIntentFromStream(Intent intent) {
 
         if (intent.getExtras().containsKey(Intent.EXTRA_STREAM)) {
-            List streams = (List) intent.getExtras().get(Intent.EXTRA_STREAM);
             ImageView bmpView = findViewById(R.id.bmpView);
-            bmpView.setImageURI((Uri)streams.get(0));
-            return getIntent((Uri) streams.get(0));
+            Object extraStream = intent.getExtras().get(Intent.EXTRA_STREAM);
+            if (extraStream instanceof List) {
+                List streams = (List) extraStream;
+                bmpView.setImageURI((Uri)streams.get(0));
+                return getIntent((Uri) streams.get(0));
+            }else{
+                if (extraStream instanceof Uri) {
+                    bmpView.setImageURI((Uri)extraStream);
+                    return getIntent((Uri)extraStream);
+                }
+            }
+
         }
 
         return null;
