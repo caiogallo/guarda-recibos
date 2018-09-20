@@ -3,6 +3,8 @@ package com.caiogallo.guardarecibo.adapters;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +50,23 @@ public class ListImageTitleAdapter extends BaseAdapter{
         View view1 = activity.getLayoutInflater().inflate(R.layout.list_image_title, viewGroup, false);
         FileModel fileModel = items.get(i);
 
-        ImageView imgView = view1.findViewById(R.id.img_comprovante);
-        imgView.setImageBitmap(loadFromPath(fileModel.getAbsolutPath()));
+        createImageView(view1, fileModel);
+        createTextView(view1, fileModel);
+        return view1;
+    }
+
+    private void createTextView(View view1, FileModel fileModel) {
         TextView textView = view1.findViewById(R.id.txt_comprovante);
         textView.setText(fileModel.getName());
-        return view1;
+    }
+
+    private void createImageView(View view1, FileModel fileModel) {
+        ImageView imgView = view1.findViewById(R.id.img_comprovante);
+        imgView.setImageBitmap(loadFromPath(fileModel.getAbsolutPath()));
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imgView.setColorFilter(filter);
     }
 
     private Bitmap loadFromPath(final String filename) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="caiogallo.com.guardarecibo.com.caiogallo.guardarecibo.ShareActivity">
+    tools:context="com.caiogallo.guardarecibo.ShareActivity">
 
     <TextView
         android:id="@+id/txtMonth"

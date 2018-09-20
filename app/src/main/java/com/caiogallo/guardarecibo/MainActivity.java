@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             List navigate = navigator.navigate(this, appPathStr);
             ArrayAdapter adapter = new ArrayAdapter(this,
-                    android.R.layout.simple_list_item_2, android.R.id.text1, navigate);
+                    android.R.layout.simple_list_item_1, android.R.id.text1, navigate);
             ListView listaArquivosRaiz = findViewById(R.id.lista_arquivos_raiz);
             listaArquivosRaiz.setAdapter(adapter);
             listaArquivosRaiz.setOnItemClickListener(new ItemListClick(appPathStr, this, this));

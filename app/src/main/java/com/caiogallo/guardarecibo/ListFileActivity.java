@@ -42,7 +42,7 @@ public class ListFileActivity extends ListActivity {
         Log.i(TAG, String.format("first %s is directory %s", values.get(0), isDirectory));
         if (isDirectory) {
             ArrayAdapter adapter = new ArrayAdapter(this,
-                    android.R.layout.simple_list_item_2, android.R.id.text1, values);
+                    android.R.layout.simple_list_item_1, android.R.id.text1, values);
             setListAdapter(adapter);
         }else{
             ListImageTitleAdapter adapter = new ListImageTitleAdapter(values, this);
