@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.caiogallo.guardarecibo.utils.Constants;
+import com.caiogallo.guardarecibo.utils.Utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +31,6 @@ import caiogallo.com.guardarecibo.R;
 public class ShareActivity extends AppCompatActivity {
     public static final String TAG = "ShareActivity";
     public static final String MONTH_YEAR_TEMPLATE = "%s: %d";
-    public static final String MONTH_YEAR_DIR_TEMPLATE = "GuardaRecibo/%d/%d";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class ShareActivity extends AppCompatActivity {
         boolean canAccessExternalStorage = canAccessExternalStorage();
 
         if (canAccessExternalStorage) {
-            String saveFolder = makeFolder(getMonthOfYear(), getYear());
+            String saveFolder = makeFolder(Utils.getMonthOfYear(), Utils.getYear());
             Log.d(TAG, "make folder: " + saveFolder);
 
             InputStream inputStream = loadIntentFromStream(intent);
@@ -85,9 +87,9 @@ public class ShareActivity extends AppCompatActivity {
     }
 
     private void configureLabels() {
-        setText(String.format(MONTH_YEAR_TEMPLATE, getResources().getString(R.string.lblMonth), getMonthOfYear()),
+        setText(String.format(MONTH_YEAR_TEMPLATE, getResources().getString(R.string.lblMonth), Utils.getMonthOfYear()),
                 (TextView) findViewById(R.id.txtMonth));
-        setText(String.format(MONTH_YEAR_TEMPLATE, getResources().getString(R.string.lblYear), getYear()),
+        setText(String.format(MONTH_YEAR_TEMPLATE, getResources().getString(R.string.lblYear), Utils.getYear()),
                 (TextView) findViewById(R.id.txtYear));
     }
 
@@ -95,16 +97,8 @@ public class ShareActivity extends AppCompatActivity {
         editTextView.setText(msg);
     }
 
-    private Integer getMonthOfYear(){
-        return Calendar.getInstance().get(Calendar.MONTH) + 1;
-    }
-
-    private Integer getYear(){
-        return Calendar.getInstance().get(Calendar.YEAR);
-    }
-
     private String makeFolder(int mes, int ano) {
-        String dirpath = String.format(MONTH_YEAR_DIR_TEMPLATE, ano, mes);
+        String dirpath = String.format(Constants.ROOT_DIR + Constants.MONTH_YEAR_DIR_TEMPLATE, ano, mes);
         File subdir = new File(Environment.getExternalStorageDirectory(), dirpath);
         if (subdir.exists()) {
             Log.i(TAG, String.format("path %s exists", dirpath));
