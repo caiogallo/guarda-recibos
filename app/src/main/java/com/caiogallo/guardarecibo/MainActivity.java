@@ -74,9 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void permissionVisibility(final int visibility) {
         View btnPedirPermissao = findViewById(R.id.btnPedirPermissao);
-        btnPedirPermissao.setVisibility(visibility);
+        if (btnPedirPermissao != null) {
+            btnPedirPermissao.setVisibility(visibility);
+        }
         View txtPedirPermissao = findViewById(R.id.txtPedirPermissao);
-        txtPedirPermissao.setVisibility(visibility);
+        if (txtPedirPermissao != null) {
+            txtPedirPermissao.setVisibility(visibility);
+        }
     }
 
     private void navigate() {

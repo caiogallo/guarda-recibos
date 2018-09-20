@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.caiogallo.guardarecibo.ListFileActivity;
+import com.caiogallo.guardarecibo.model.FileModel;
 
 import java.io.File;
 
@@ -28,12 +29,14 @@ public class ItemListClick implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
         Log.i(TAG, "click item");
-        String filename = (String) adapterView.getAdapter().getItem(pos);
+        FileModel fileModel = (FileModel) adapterView.getAdapter().getItem(pos);
+        String filename;
         if (path.endsWith(File.separator)) {
-            filename = path + filename;
+            filename = path + fileModel.getName();
         } else {
-            filename = path + File.separator + filename;
+            filename = path + File.separator + fileModel.getName();
         }
+        Log.i(TAG, filename);
         if (new File(filename).isDirectory()) {
             Intent intent = new Intent(context, ListFileActivity.class);
             intent.putExtra("path", filename);

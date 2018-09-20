@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.caiogallo.guardarecibo.adapters.ListImageTitleAdapter;
 import com.caiogallo.guardarecibo.filenavigator.FileNavigator;
 import com.caiogallo.guardarecibo.filenavigator.FileNavigatorException;
 import com.caiogallo.guardarecibo.listeners.ItemListClick;
+import com.caiogallo.guardarecibo.model.FileModel;
 
 import java.util.List;
 
@@ -28,17 +30,30 @@ public class ListFileActivity extends ListActivity {
 
         path = getIntent().getStringExtra("path");
         FileNavigator fileNavigator = new FileNavigator();
+        List<FileModel> values = null;
         try {
-            List values = fileNavigator.navigate(this, path);
-            ArrayAdapter adapter = new ArrayAdapter(this,
-                    android.R.layout.simple_list_item_2, android.R.id.text1, values);
-            setListAdapter(adapter);
+            values = fileNavigator.navigate(this, path);
         } catch (FileNavigatorException e) {
             Log.e(TAG, "Cannot navigate", e);
             Toast.makeText(this, String.format("Cannot navigate %s", e.getMessage()),
                     Toast.LENGTH_LONG).show();
         }
-
+        boolean isDirectory = isDirectoryStructure(values);
+        Log.i(TAG, String.format("first %s is directory %s", values.get(0), isDirectory));
+        if (isDirectory) {
+            ArrayAdapter adapter = new ArrayAdapter(this,
+                    android.R.layout.simple_list_item_2, android.R.id.text1, values);
+            setListAdapter(adapter);
+        }else{
+            ListImageTitleAdapter adapter = new ListImageTitleAdapter(values, this);
+            setListAdapter(adapter);
+        }
+    }
+    private boolean isDirectoryStructure(List<FileModel> values) {
+        if (values != null) {
+            return values.stream().filter(f -> f.isDirectory()).count() > 0;
+        }
+        return false;
     }
 
     @Override
