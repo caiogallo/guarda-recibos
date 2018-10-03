@@ -12,10 +12,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.Getter;
+
 public class FileNavigator {
     public static final String TAG = "FileNavigator";
 
-    public List navigate(Context context, String rootFolder) throws FileNavigatorException {
+    public List navigate(Context context, String rootFolder, int depth) throws FileNavigatorException {
         List<FileModel> values = new ArrayList();
         File dir = new File(rootFolder);
         if(!dir.canRead()){
@@ -32,6 +34,7 @@ public class FileNavigator {
                             .directory(file.isDirectory())
                             .name(file.getName())
                             .absolutPath(file.getAbsolutePath())
+                            .depth(depth)
                             .build());
                 }
             }

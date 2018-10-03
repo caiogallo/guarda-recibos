@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Guarda Recibo</string>
     <string name="title_activity_main">Guarda Recibo</string>
+    <string name="title_navigate_files">Navegar nos arquivos</string>
     <string name="lblMonth">Mês</string>
     <string name="lblYear">Ano</string>
     <string name="unableToSaveFile">Não foi possível salvar o arquivo</string>
     <string name="unableToSaveFileNoPermission">Não posso salvar recibos, não tenho permissão para isso :(</string>
     <string name="noExternalStoragePermission">Você precisa habilitar a gravação no cartão para que o aplicativo funcione corretamente</string>
     <string name="askPermission">Pedir permissão</string>
+
 </resources>

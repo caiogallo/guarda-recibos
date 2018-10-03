@@ -1,8 +1,8 @@
 package com.caiogallo.guardarecibo;
 
 import android.app.ListActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +15,7 @@ import com.caiogallo.guardarecibo.filenavigator.FileNavigatorException;
 import com.caiogallo.guardarecibo.listeners.ItemListClick;
 import com.caiogallo.guardarecibo.model.FileModel;
 
+import java.io.File;
 import java.util.List;
 
 import caiogallo.com.guardarecibo.R;
@@ -29,10 +30,12 @@ public class ListFileActivity extends ListActivity {
         setContentView(R.layout.activity_list_file);
 
         path = getIntent().getStringExtra("path");
+        int depth = getIntent().getExtras().getInt("depth");
+        defineToolbarTitle(depth);
         FileNavigator fileNavigator = new FileNavigator();
         List<FileModel> values = null;
         try {
-            values = fileNavigator.navigate(this, path);
+            values = fileNavigator.navigate(this, path, ++depth);
         } catch (FileNavigatorException e) {
             Log.e(TAG, "Cannot navigate", e);
             Toast.makeText(this, String.format("Cannot navigate %s", e.getMessage()),
@@ -48,7 +51,19 @@ public class ListFileActivity extends ListActivity {
             ListImageTitleAdapter adapter = new ListImageTitleAdapter(values, this);
             setListAdapter(adapter);
         }
+
     }
+
+    private void defineToolbarTitle(int depth) {
+        String[] splittedPath = path.split(File.separator);
+        String lastPath = "";
+        for(int i = splittedPath.length - depth; i < splittedPath.length; i++) {
+            lastPath += splittedPath[i] + File.separator;
+        }
+        Toolbar toolbar = findViewById(R.id.toolbar_list_file);
+        toolbar.setTitle(lastPath);
+    }
+
     private boolean isDirectoryStructure(List<FileModel> values) {
         if (values != null) {
             return values.stream().filter(f -> f.isDirectory()).count() > 0;

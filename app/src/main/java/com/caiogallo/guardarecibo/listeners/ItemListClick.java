@@ -3,6 +3,7 @@ package com.caiogallo.guardarecibo.listeners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,8 @@ import com.caiogallo.guardarecibo.ListFileActivity;
 import com.caiogallo.guardarecibo.model.FileModel;
 
 import java.io.File;
+
+import caiogallo.com.guardarecibo.R;
 
 public class ItemListClick implements AdapterView.OnItemClickListener {
     public static final String TAG = "ItemListClick";
@@ -40,9 +43,12 @@ public class ItemListClick implements AdapterView.OnItemClickListener {
         if (new File(filename).isDirectory()) {
             Intent intent = new Intent(context, ListFileActivity.class);
             intent.putExtra("path", filename);
+            intent.putExtra("depth", fileModel.getDepth());
             context.startActivity(intent);
         } else {
             Toast.makeText(context, filename + " is not a directory", Toast.LENGTH_LONG).show();
         }
     }
+
+
 }
