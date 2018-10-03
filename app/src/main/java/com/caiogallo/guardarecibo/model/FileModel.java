@@ -9,6 +9,7 @@ public class FileModel {
     private String name;
     private String absolutPath;
     private boolean directory;
+    private int depth;
 
     @Override
     public String toString() {

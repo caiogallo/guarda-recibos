@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         String appPathStr = appPath.getPath() + File.separator + Constants.ROOT_DIR;
         FileNavigator navigator = new FileNavigator();
         try {
-            List navigate = navigator.navigate(this, appPathStr);
+            List navigate = navigator.navigate(this, appPathStr, 1);
             ArrayAdapter adapter = new ArrayAdapter(this,
                     android.R.layout.simple_list_item_1, android.R.id.text1, navigate);
             ListView listaArquivosRaiz = findViewById(R.id.lista_arquivos_raiz);
