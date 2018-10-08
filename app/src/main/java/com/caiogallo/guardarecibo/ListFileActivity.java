@@ -66,7 +66,11 @@ public class ListFileActivity extends ListActivity {
 
     private boolean isDirectoryStructure(List<FileModel> values) {
         if (values != null) {
-            return values.stream().filter(f -> f.isDirectory()).count() > 0;
+            for (FileModel fileModel : values) {
+                if (fileModel.isDirectory()) {
+                    return true;
+                }
+            }
         }
         return false;
     }
