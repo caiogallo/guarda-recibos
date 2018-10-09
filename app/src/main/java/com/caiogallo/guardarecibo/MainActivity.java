@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.caiogallo.guardarecibo.adapters.ListFolderAdapter;
 import com.caiogallo.guardarecibo.filenavigator.FileNavigator;
 import com.caiogallo.guardarecibo.filenavigator.FileNavigatorException;
 import com.caiogallo.guardarecibo.listeners.ItemListClick;
@@ -89,8 +90,7 @@ public class MainActivity extends AppCompatActivity {
         FileNavigator navigator = new FileNavigator();
         try {
             List navigate = navigator.navigate(this, appPathStr, 1);
-            ArrayAdapter adapter = new ArrayAdapter(this,
-                    android.R.layout.simple_list_item_1, android.R.id.text1, navigate);
+            ListFolderAdapter adapter = new ListFolderAdapter(navigate, this);
             ListView listaArquivosRaiz = findViewById(R.id.lista_arquivos_raiz);
             listaArquivosRaiz.setAdapter(adapter);
             listaArquivosRaiz.setOnItemClickListener(new ItemListClick(appPathStr, this, this));
