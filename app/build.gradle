@@ -1,5 +1,31 @@
 apply plugin: 'com.android.application'
 
+def signingPropertiesFile = file('../../build/secret/google-play.properties')
+def keystoreProperties = new Properties()
+if (signingPropertiesFile && signingPropertiesFile.isFile()) {
+    keystoreProperties.load(new FileInputStream(signingPropertiesFile))
+}
+
+android {
+
+    signingConfigs {
+        release {
+            storeFile = keystoreProperties['storeFile']
+            ? file("../../build/secret/${keystoreProperties['storeFile']}")
+            : null
+            storePassword = keystoreProperties['storePassword']
+            keyAlias = keystoreProperties['keyAlias']
+            keyPassword = keystoreProperties['keyPassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
