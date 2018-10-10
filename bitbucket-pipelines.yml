@@ -8,6 +8,7 @@ image: uber/android-build-environment:latest
 pipelines:
   default:
     - step:
+        name: Build
         caches:
           - gradle
         script: # Modify the commands below to build your repository.
