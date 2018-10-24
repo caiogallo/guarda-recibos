@@ -8,5 +8,6 @@
     <string name="unableToSaveFileNoPermission">Não posso salvar recibos, não tenho permissão para isso :(</string>
     <string name="noExternalStoragePermission">Você precisa habilitar a gravação no cartão para que o aplicativo funcione corretamente</string>
     <string name="askPermission">Pedir permissão</string>
+    <string name="empty_file_list">Nenhum arquivo encontrado. Compartilhe algum arquivo com esse aplicativo para começar a usar.</string>
 
 </resources>

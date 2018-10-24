@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caiogallo.guardarecibo.adapters.ListFolderAdapter;
@@ -23,6 +24,7 @@ import com.caiogallo.guardarecibo.listeners.ItemListClick;
 import com.caiogallo.guardarecibo.utils.Constants;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import caiogallo.com.guardarecibo.R;
@@ -74,31 +76,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void permissionVisibility(final int visibility) {
-        View btnPedirPermissao = findViewById(R.id.btnPedirPermissao);
-        if (btnPedirPermissao != null) {
-            btnPedirPermissao.setVisibility(visibility);
+        View btnRequestPermission = findViewById(R.id.btnPedirPermissao);
+        if (btnRequestPermission != null) {
+            btnRequestPermission.setVisibility(visibility);
         }
-        View txtPedirPermissao = findViewById(R.id.txtPedirPermissao);
-        if (txtPedirPermissao != null) {
-            txtPedirPermissao.setVisibility(visibility);
+        View txtRequestPermission = findViewById(R.id.txtPedirPermissao);
+        if (txtRequestPermission != null) {
+            txtRequestPermission.setVisibility(visibility);
         }
+    }
+
+    public List getFolders(String appPathStr){
+        FileNavigator navigator = new FileNavigator();
+        try {
+            List navigate = navigator.navigate(this, appPathStr, 1);
+            return navigate;
+        }catch (FileNavigatorException e) {
+            Log.e(TAG, "Cannot navigate", e);
+            Toast.makeText(this, String.format("Cannot navigate %s", e.getMessage()),
+                    Toast.LENGTH_LONG).show();
+        }
+        return new ArrayList();
     }
 
     private void navigate() {
         File appPath = Environment.getExternalStorageDirectory();
         String appPathStr = appPath.getPath() + File.separator + Constants.ROOT_DIR;
-        FileNavigator navigator = new FileNavigator();
-        try {
-            List navigate = navigator.navigate(this, appPathStr, 1);
-            ListFolderAdapter adapter = new ListFolderAdapter(navigate, this);
-            ListView listaArquivosRaiz = findViewById(R.id.lista_arquivos_raiz);
-            listaArquivosRaiz.setAdapter(adapter);
-            listaArquivosRaiz.setOnItemClickListener(new ItemListClick(appPathStr, this, this));
-        } catch (FileNavigatorException e) {
-            Log.e(TAG, "Cannot navigate", e);
-            Toast.makeText(this, String.format("Cannot navigate %s", e.getMessage()),
-                    Toast.LENGTH_LONG).show();
-        }
+        List folders = getFolders(appPathStr);
+        ListView listRootFiles = findViewById(R.id.lista_arquivos_raiz);
+        listRootFiles.setEmptyView(findViewById(R.id.emptyListView));
+        ListFolderAdapter adapter = new ListFolderAdapter(folders, this);
+        listRootFiles.setAdapter(adapter);
+        listRootFiles.setOnItemClickListener(
+                new ItemListClick(appPathStr, this, this));
     }
 
 
