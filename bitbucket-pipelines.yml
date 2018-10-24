@@ -6,16 +6,17 @@
 image: uber/android-build-environment:latest
 
 pipelines:
-  default:
-    - step:
-        name: Build
-        caches:
-          - gradle
-        script: # Modify the commands below to build your repository.
-          # You must commit the Gradle wrapper to your repository
-          # https://docs.gradle.org/current/userguide/gradle_wrapper.html
-#          - bash ./gradlew build
-          - git config --file=.gitmodules submodule.build/secret.url https://$BITBUCKET_USER:$BITBUCKET_PASS@bitbucket.org/caiogallo/credentials.git
-          - git submodule sync
-          - git submodule update --init build/secret
-          - ./build.sh
+  branches:
+    master:
+      - step:
+          name: Build
+          caches:
+            - gradle
+          script: # Modify the commands below to build your repository.
+            # You must commit the Gradle wrapper to your repository
+            # https://docs.gradle.org/current/userguide/gradle_wrapper.html
+  #          - bash ./gradlew build
+            - git config --file=.gitmodules submodule.build/secret.url https://$BITBUCKET_USER:$BITBUCKET_PASS@bitbucket.org/caiogallo/credentials.git
+            - git submodule sync
+            - git submodule update --init build/secret
+            - ./build.sh
