@@ -1,3 +1,0 @@
-[submodule "build/secret"]
-	path = build/secret
-	url = git@bitbucket.org:caiogallo/credentials.git
