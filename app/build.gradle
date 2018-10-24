@@ -32,8 +32,8 @@ android {
         applicationId "caiogallo.com.guardarecibo"
         minSdkVersion 23
         targetSdkVersion 27
-        versionCode 106
-        versionName "1.0.6"
+        versionCode 107
+        versionName "1.0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
