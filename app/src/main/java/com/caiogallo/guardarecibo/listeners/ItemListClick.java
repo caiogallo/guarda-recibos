@@ -3,7 +3,7 @@ package com.caiogallo.guardarecibo.listeners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +13,6 @@ import com.caiogallo.guardarecibo.ListFileActivity;
 import com.caiogallo.guardarecibo.model.FileModel;
 
 import java.io.File;
-
-import caiogallo.com.guardarecibo.R;
 
 public class ItemListClick implements AdapterView.OnItemClickListener {
     public static final String TAG = "ItemListClick";

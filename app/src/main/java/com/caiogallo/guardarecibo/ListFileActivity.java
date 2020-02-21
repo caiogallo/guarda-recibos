@@ -2,10 +2,9 @@ package com.caiogallo.guardarecibo;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,7 +42,9 @@ public class ListFileActivity extends ListActivity {
                     Toast.LENGTH_LONG).show();
         }
         boolean isDirectory = isDirectoryStructure(values);
-        Log.i(TAG, String.format("first %s is directory %s", values.get(0), isDirectory));
+        if(values != null && values.size() > 0) {
+            Log.i(TAG, String.format("first %s is directory %s", values.get(0), isDirectory));
+        }
         if (isDirectory) {
             ListFolderAdapter adapter = new ListFolderAdapter(values, this);
             setListAdapter(adapter);
